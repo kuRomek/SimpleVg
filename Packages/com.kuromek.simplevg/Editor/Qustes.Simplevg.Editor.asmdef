@@ -1,0 +1,10 @@
+{
+    "name": "Qustes.Simplevg.Editor",
+    "references": [
+      "Qustes.Simplevg"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

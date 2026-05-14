@@ -1,0 +1,11 @@
+{
+    "name": "Qustes.Simplevg.Tests",
+    "references": [
+        "Qustes.Simplevg"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

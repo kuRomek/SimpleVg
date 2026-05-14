@@ -1,0 +1,14 @@
+{
+    "name": "Qustes.Simplevg.Editor.Tests",
+    "references": [
+        "Qustes.Simplevg.Editor",
+        "Qustes.Simplevg"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
