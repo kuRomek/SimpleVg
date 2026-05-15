@@ -1,7 +1,4 @@
 ﻿<Solution>
   <Project Path="kuRomek.SimpleVg.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="Qustes.Simplevg.Editor.csproj" />
-  <Project Path="Qustes.Simplevg.Tests.csproj" />
-  <Project Path="Qustes.Simplevg.Editor.Tests.csproj" />
 </Solution>

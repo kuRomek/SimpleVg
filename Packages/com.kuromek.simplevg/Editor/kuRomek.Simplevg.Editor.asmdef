@@ -1,0 +1,18 @@
+{
+    "name": "kuRomek.Simplevg.Editor",
+    "rootNamespace": "",
+    "references": [
+        "Qustes.Simplevg"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
