@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace kuRomek.SimpleVG
 {
-    public class Presenter
+    public abstract class Presenter
     {
         private readonly Model _model;
         private readonly View _view;
@@ -13,7 +15,7 @@ namespace kuRomek.SimpleVG
         public Presenter(View view)
         {
             _view = view;
-            _model = new(view.transform);
+            _model = CreateModel(view.transform);
 
             _updatable = _model is IUpdatable updatable ? updatable : null;
         }
@@ -22,5 +24,7 @@ namespace kuRomek.SimpleVG
         {
             _updatable?.Update(deltaTime);
         }
+
+        protected abstract Model CreateModel(Transform transform);
     }
 }
