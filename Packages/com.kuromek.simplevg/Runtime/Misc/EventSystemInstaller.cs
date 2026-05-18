@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class EventSystemInstaller : Installer
+namespace kuRomek.SimpleVG
 {
-    private static EventSystemInstaller _instance;
-
-    protected override void Install()
+    public class EventSystemInstaller : Installer
     {
-        if (_instance != null)
+        private static EventSystemInstaller _instance;
+
+        protected override void Install()
         {
-            Debug.LogError($"Multiple instances of {nameof(EventSystemInstaller)} detected. Leaving the last instantiated one.");
-            Destroy(_instance.gameObject);
+            if (_instance != null)
+            {
+                Debug.LogError($"Multiple instances of {nameof(EventSystemInstaller)} detected. Leaving the last instantiated one.");
+                Destroy(_instance.gameObject);
+            }
+
+            _instance = this;
+
+            _instance.gameObject.name = nameof(EventSystemInstaller);
         }
-
-        _instance = this;
-
-        _instance.gameObject.name = nameof(EventSystemInstaller);
     }
 }

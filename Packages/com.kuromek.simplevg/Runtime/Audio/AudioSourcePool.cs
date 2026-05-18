@@ -2,49 +2,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioSourcePool : MonoBehaviour
+namespace kuRomek.SimpleVG
 {
-    [SerializeField] private int _initialSourcesCount = 16;
-    [SerializeField] private AudioMixerGroup _audioMixerGroup;
-
-    private List<AudioSource> _availableSources;
-
-    private void Awake()
+    public class AudioSourcePool : MonoBehaviour
     {
-        _availableSources = new List<AudioSource>(_initialSourcesCount * 2);
+        [SerializeField] private int _initialSourcesCount = 16;
+        [SerializeField] private AudioMixerGroup _audioMixerGroup;
 
-        for (int i = 0; i < _initialSourcesCount; i++)
-            _availableSources.Add(CreateAudioSource());
-    }
+        private List<AudioSource> _availableSources;
 
-    public AudioSource Get()
-    {
-        AudioSource audioSource;
-
-        if (_availableSources.Count == 0)
+        private void Awake()
         {
-            audioSource = CreateAudioSource();
-        }
-        else
-        {
-            audioSource = _availableSources[_availableSources.Count - 1];
-            _availableSources.RemoveAt(_availableSources.Count - 1);
+            _availableSources = new List<AudioSource>(_initialSourcesCount * 2);
+
+            for (int i = 0; i < _initialSourcesCount; i++)
+                _availableSources.Add(CreateAudioSource());
         }
 
-        return audioSource;
-    }
+        public AudioSource Get()
+        {
+            AudioSource audioSource;
 
-    public void Release(AudioSource audioSource)
-    {
-        _availableSources.Add(audioSource);
-    }
+            if (_availableSources.Count == 0)
+            {
+                audioSource = CreateAudioSource();
+            }
+            else
+            {
+                audioSource = _availableSources[_availableSources.Count - 1];
+                _availableSources.RemoveAt(_availableSources.Count - 1);
+            }
 
-    private AudioSource CreateAudioSource()
-    {
-        var go = new GameObject("AudioSource");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        go.transform.SetParent(transform);
-        audioSource.outputAudioMixerGroup = _audioMixerGroup;
-        return audioSource;
+            return audioSource;
+        }
+
+        public void Release(AudioSource audioSource)
+        {
+            _availableSources.Add(audioSource);
+        }
+
+        private AudioSource CreateAudioSource()
+        {
+            var go = new GameObject("AudioSource");
+            AudioSource audioSource = go.AddComponent<AudioSource>();
+            go.transform.SetParent(transform);
+            audioSource.outputAudioMixerGroup = _audioMixerGroup;
+            return audioSource;
+        }
     }
 }

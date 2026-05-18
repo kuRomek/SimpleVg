@@ -1,4 +1,5 @@
 ﻿<Solution>
   <Project Path="kuRomek.SimpleVg.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="kuRomek.SimpleVG.Keys.csproj" />
 </Solution>

@@ -1,60 +1,63 @@
 using UnityEngine;
 
-public class InputController : Installer
+namespace kuRomek.SimpleVG
 {
-    private static InputController _instance;
-    private InputActions _actions;
-    private bool _isInputBlocked;
-
-    public PlayerInput Current { get; private set; }
-
-    protected override void Install()
+    public class InputController : Installer
     {
-        if (_instance != null)
+        private static InputController _instance;
+        private InputActions _actions;
+        private bool _isInputBlocked;
+
+        public PlayerInput Current { get; private set; }
+
+        protected override void Install()
         {
-            Debug.LogError($"Multiple instances of {nameof(InputController)} detected. Leaving the last instantiated one.");
-            Destroy(_instance.gameObject);
+            if (_instance != null)
+            {
+                Debug.LogError($"Multiple instances of {nameof(InputController)} detected. Leaving the last instantiated one.");
+                Destroy(_instance.gameObject);
+            }
+
+            _instance = this;
+
+            _instance.gameObject.name = nameof(InputController);
         }
 
-        _instance = this;
+        private void Start()
+        {
+            Enable();
 
-        _instance.gameObject.name = nameof(InputController);
-    }
+            _actions = new();
+            _actions.Enable();
+        }
 
-    private void Start()
-    {
-        Enable();
+        private void Update()
+        {
+            if (_isInputBlocked)
+                return;
 
-        _actions = new();
-        _actions.Enable();
-    }
+            Current = InputInterpreter.ReadInputValues(_actions);
+        }
 
-    private void Update()
-    {
-        if (_isInputBlocked)
-            return;
+        private void OnDestroy()
+        {
+            _actions.Disable();
+        }
 
-        Current = InputInterpreter.ReadInputValues(_actions);
-    }
+        public static void Enable()
+        {
+            _instance._isInputBlocked = false;
+        }
 
-    private void OnDestroy()
-    {
-        _actions.Disable();
-    }
+        public static void Disable()
+        {
+            _instance.ResetInputValues();
+            _instance._isInputBlocked = true;
+        }
 
-    public static void Enable()
-    {
-        _instance._isInputBlocked = false;
-    }
-
-    public static void Disable()
-    {
-        _instance.ResetInputValues();
-        _instance._isInputBlocked = true;
-    }
-
-    public void ResetInputValues()
-    {
-        Current = default;
+        public void ResetInputValues()
+        {
+            Current = default;
+        }
     }
 }

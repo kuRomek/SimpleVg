@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class ConfigsInstaller : Installer
+namespace kuRomek.SimpleVG
 {
-    private static ConfigsInstaller _instance;
-
-    protected override void Install()
+    public class ConfigsInstaller : Installer
     {
-        if (_instance != null)
+        private static ConfigsInstaller _instance;
+
+        protected override void Install()
         {
-            Debug.LogError($"Multiple instances of {nameof(ConfigsInstaller)} detected. Leaving the last instantiated one.");
-            Destroy(_instance.gameObject);
+            if (_instance != null)
+            {
+                Debug.LogError($"Multiple instances of {nameof(ConfigsInstaller)} detected. Leaving the last instantiated one.");
+                Destroy(_instance.gameObject);
+            }
+
+            _instance = this;
+
+            _instance.gameObject.name = nameof(ConfigsInstaller);
         }
-
-        _instance = this;
-
-        _instance.gameObject.name = nameof(ConfigsInstaller);
     }
 }

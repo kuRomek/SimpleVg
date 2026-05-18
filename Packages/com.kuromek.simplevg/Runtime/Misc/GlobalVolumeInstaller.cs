@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class GlobalVolumeInstaller : Installer
+namespace kuRomek.SimpleVG
 {
-    private static GlobalVolumeInstaller _instance;
-
-    protected override void Install()
+    public class GlobalVolumeInstaller : Installer
     {
-        if (_instance != null)
+        private static GlobalVolumeInstaller _instance;
+
+        protected override void Install()
         {
-            Debug.LogError($"Multiple instances of {nameof(GlobalVolumeInstaller)} detected. Leaving the last instantiated one.");
-            Destroy(_instance.gameObject);
+            if (_instance != null)
+            {
+                Debug.LogError($"Multiple instances of {nameof(GlobalVolumeInstaller)} detected. Leaving the last instantiated one.");
+                Destroy(_instance.gameObject);
+            }
+
+            _instance = this;
+
+            _instance.gameObject.name = nameof(GlobalVolumeInstaller);
         }
-
-        _instance = this;
-
-        _instance.gameObject.name = nameof(GlobalVolumeInstaller);
     }
 }

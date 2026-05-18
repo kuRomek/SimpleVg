@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public abstract class Installer : MonoBehaviour
+namespace kuRomek.SimpleVG
 {
-    public void Initialize()
+    public abstract class Installer : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
-        Install();
-    }
+        public void Initialize()
+        {
+            DontDestroyOnLoad(gameObject);
+            Install();
+        }
 
-    protected abstract void Install();
+        protected abstract void Install();
+    }
 }

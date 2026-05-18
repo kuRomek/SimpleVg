@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public static class ContextLoaderInternal
+namespace kuRomek.SimpleVG
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void Load()
+    public static class ContextLoaderInternal
     {
-        Utils.InstallerLoader.Load<AudioPlayer>(nameof(AudioPlayer));
-        Utils.InstallerLoader.Load<GlobalVolumeInstaller>(nameof(GlobalVolumeInstaller));
-        Utils.InstallerLoader.Load<EventSystemInstaller>(nameof(EventSystemInstaller));
-        Utils.InstallerLoader.Load<ConfigsInstaller>(nameof(ConfigsInstaller));
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Load()
+        {
+            Utils.InstallerLoader.Load<AudioPlayer>(nameof(AudioPlayer));
+            Utils.InstallerLoader.Load<GlobalVolumeInstaller>(nameof(GlobalVolumeInstaller));
+            Utils.InstallerLoader.Load<EventSystemInstaller>(nameof(EventSystemInstaller));
+            Utils.InstallerLoader.Load<ConfigsInstaller>(nameof(ConfigsInstaller));
+        }
     }
 }

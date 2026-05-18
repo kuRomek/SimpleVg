@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public struct SoundEffect
+namespace kuRomek.SimpleVG
 {
-    public AudioKeys.Sound SoundKey;
-    public Vector2 PitchRange;
-    public Vector3 Position;
+    public struct SoundEffect
+    {
+        public Keys.Audio.Sound SoundKey;
+        public Vector2 PitchRange;
+        public Vector3 Position;
+    }
 }
