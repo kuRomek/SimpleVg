@@ -11,6 +11,7 @@
     "email": "qustes@gmail.com"
   },
   "dependencies": {
-    "com.cysharp.unitask": "2.5.10"
+    "com.cysharp.unitask": "2.5.10",
+    "com.unity.inputsystem": "1.18.0"
   }
 }
