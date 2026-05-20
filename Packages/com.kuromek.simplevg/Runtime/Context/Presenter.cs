@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace kuRomek.SimpleVG
 {
     public abstract class Presenter
