@@ -6,11 +6,13 @@ namespace kuRomek.SimpleVG
     {
         private Presenter _presenter;
 
-        protected abstract Presenter CreatePresenter();
+        protected abstract Model CreateModel();
+
+        protected abstract Presenter CreatePresenter(Model model);
 
         private void Awake()
         {
-            _presenter = CreatePresenter();
+            _presenter = CreatePresenter(CreateModel());
             OnAwake();
         }
 

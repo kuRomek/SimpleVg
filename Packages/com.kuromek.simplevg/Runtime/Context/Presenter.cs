@@ -12,10 +12,10 @@ namespace kuRomek.SimpleVG
 
         private IUpdatable _updatable;
 
-        public Presenter(View view)
+        public Presenter(View view, Model model)
         {
             _view = view;
-            _model = CreateModel(view.transform);
+            _model = model;
 
             _updatable = _model is IUpdatable updatable ? updatable : null;
         }
@@ -24,7 +24,5 @@ namespace kuRomek.SimpleVG
         {
             _updatable?.Update(deltaTime);
         }
-
-        protected abstract Model CreateModel(Transform transform);
     }
 }
