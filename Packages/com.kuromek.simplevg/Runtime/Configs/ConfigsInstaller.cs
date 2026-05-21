@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace kuRomek.SimpleVG
 {
-    public class ConfigsInstaller : Installer
+    public partial class ConfigsInstaller : Installer
     {
         private static ConfigsInstaller _instance;
 
@@ -17,6 +17,9 @@ namespace kuRomek.SimpleVG
             _instance = this;
 
             _instance.gameObject.name = nameof(ConfigsInstaller);
+
+            ConfigsInternal.LoadInternalConfigs();
+            Configs.LoadLocalConfigs();
         }
     }
 }
