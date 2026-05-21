@@ -8,7 +8,7 @@ namespace kuRomek.SimpleVG
         private InputActions _actions;
         private bool _isInputBlocked;
 
-        public PlayerInput Current { get; private set; }
+        public static PlayerInput Current { get; private set; }
 
         protected override void Install()
         {
