@@ -8,7 +8,9 @@ namespace kuRomek.SimpleVG
 
         private void Update()
         {
-            _presenter.Update(Time.deltaTime);
+            if (_presenter is IUpdatable updatable)
+                updatable.Update(Time.deltaTime);
+
             OnUpdate();
         }
 
