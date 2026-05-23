@@ -16,37 +16,29 @@ public class SimpleDI
         return (T)_container[typeof(T)];
     }
 
-    public void Inject(object target)
+    public void InjectConstructors(object target)
     {
-        var type = target.GetType();
+        var methods = target.GetType()
+            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
-        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-
-        foreach (var field in fields)
+        foreach (var method in methods)
         {
-            if (Attribute.IsDefined(field, typeof(InjectAttribute)))
-            {
-                var dependency = Resolve(field.FieldType);
-                field.SetValue(target, dependency);
-            }
-        }
+            if (method.Name != "Construct") continue;
 
-        var props = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var parameters = method.GetParameters();
+            var args = new object[parameters.Length];
 
-        foreach (var prop in props)
-        {
-            if (Attribute.IsDefined(prop, typeof(InjectAttribute)) && prop.CanWrite)
-            {
-                var dependency = Resolve(prop.PropertyType);
-                prop.SetValue(target, dependency);
-            }
+            for (int i = 0; i < parameters.Length; i++)
+                args[i] = Resolve(parameters[i].ParameterType);
+
+            method.Invoke(target, args);
         }
     }
 
     private object Resolve(Type type)
     {
-        if (_container.TryGetValue(type, out var service))
-            return service;
+        if (_container.TryGetValue(type, out var @object))
+            return @object;
 
         throw new Exception($"Service of type {type} not registered");
     }
