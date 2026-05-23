@@ -2,17 +2,9 @@ using UnityEngine;
 
 namespace kuRomek.SimpleVG
 {
-    public abstract class View : MonoBehaviour
+    public class View : MonoBehaviour
     {
         private Presenter _presenter;
-
-        protected abstract Presenter CreatePresenter();
-
-        private void Awake()
-        {
-            _presenter = CreatePresenter();
-            OnAwake();
-        }
 
         private void Update()
         {
@@ -20,8 +12,9 @@ namespace kuRomek.SimpleVG
             OnUpdate();
         }
 
-        protected virtual void OnAwake()
+        public void AttachPresenter(Presenter presenter)
         {
+            _presenter = presenter;
         }
 
         protected virtual void OnUpdate()
