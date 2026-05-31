@@ -4,11 +4,11 @@ namespace kuRomek.SimpleVG
 {
     public class View : MonoBehaviour
     {
-        private Presenter _presenter;
+        protected Presenter Presenter { get; private set; }
 
         private void Update()
         {
-            if (_presenter is IUpdatable updatable)
+            if (Presenter is IUpdatable updatable)
                 updatable.Update(Time.deltaTime);
 
             OnUpdate();
@@ -16,7 +16,7 @@ namespace kuRomek.SimpleVG
 
         public void AttachPresenter(Presenter presenter)
         {
-            _presenter = presenter;
+            Presenter = presenter;
         }
 
         protected virtual void OnUpdate()
