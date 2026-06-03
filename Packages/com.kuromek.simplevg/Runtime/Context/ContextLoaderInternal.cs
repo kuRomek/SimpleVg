@@ -10,7 +10,6 @@ namespace kuRomek.SimpleVG
             Utils.InstallerLoader.Load<AudioPlayer>(nameof(AudioPlayer));
             Utils.InstallerLoader.Load<GlobalVolumeInstaller>(nameof(GlobalVolumeInstaller));
             Utils.InstallerLoader.Load<EventSystemInstaller>(nameof(EventSystemInstaller));
-            Utils.InstallerLoader.Load<ConfigsInstaller>(nameof(ConfigsInstaller));
             Utils.InstallerLoader.Load<InputController>(nameof(InputController));
         }
     }
