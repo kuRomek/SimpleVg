@@ -4,16 +4,26 @@ using System.Reflection;
 
 public class SimpleDI
 {
-    private Dictionary<Type, object> _container = new();
+    private readonly Dictionary<Type, object> _container = new();
+    private readonly List<IUpdatable> _updatables = new();
 
     public void Register<T>(T instance)
     {
         _container[typeof(T)] = instance;
+
+        if (instance is IUpdatable updatable)
+            _updatables.Add(updatable);
     }
 
     public T Resolve<T>()
     {
         return (T)_container[typeof(T)];
+    }
+
+    public void Update(float deltaTime)
+    {
+        foreach (var updatable in _updatables)
+            updatable.Update(deltaTime);
     }
 
     public void InjectConstructors(object target)
