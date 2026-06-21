@@ -1,0 +1,23 @@
+using System;
+
+public class RV<T>
+{
+    private T _value;
+
+    public RV(T value)
+    {
+        _value = value;
+    }
+
+    public event Action<T> Changed;
+
+    public T Value
+    {
+        get => _value;
+        set
+        {
+            _value = value;
+            Changed?.Invoke(_value);
+        }
+    }
+}
