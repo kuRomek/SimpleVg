@@ -32,8 +32,7 @@ public class SimpleDI
 
         while (type != null)
         {
-            var methods = target.GetType()
-                .GetMethods(
+            var methods = type.GetMethods(
                     BindingFlags.Instance |
                     BindingFlags.Public |
                     BindingFlags.NonPublic |
