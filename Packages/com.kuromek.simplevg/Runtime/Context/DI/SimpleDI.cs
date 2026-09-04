@@ -28,20 +28,31 @@ public class SimpleDI
 
     public void InjectConstructors(object target)
     {
-        var methods = target.GetType()
-            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        var type = target.GetType();
 
-        foreach (var method in methods)
+        while (type != null)
         {
-            if (method.Name != "Construct") continue;
+            var methods = target.GetType()
+                .GetMethods(
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.NonPublic |
+                    BindingFlags.DeclaredOnly);
 
-            var parameters = method.GetParameters();
-            var args = new object[parameters.Length];
+            foreach (var method in methods)
+            {
+                if (method.Name != "Construct") continue;
 
-            for (int i = 0; i < parameters.Length; i++)
-                args[i] = Resolve(parameters[i].ParameterType);
+                var parameters = method.GetParameters();
+                var args = new object[parameters.Length];
 
-            method.Invoke(target, args);
+                for (int i = 0; i < parameters.Length; i++)
+                    args[i] = Resolve(parameters[i].ParameterType);
+
+                method.Invoke(target, args);
+            }
+
+            type = type.BaseType;
         }
     }
 
