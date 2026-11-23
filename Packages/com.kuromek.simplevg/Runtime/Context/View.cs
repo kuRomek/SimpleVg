@@ -16,10 +16,18 @@ namespace kuRomek.SimpleVG
 
         private void LateUpdate()
         {
-            if (Presenter is ILateUpdatable updatable)
-                updatable.LateUpdate(Time.deltaTime);
+            if (Presenter is ILateUpdatable lateUpdatable)
+                lateUpdatable.LateUpdate(Time.deltaTime);
 
             OnLateUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            if (Presenter is IFixedUpdatable fixedUpdatable)
+                fixedUpdatable.FixedUpdate(Time.fixedDeltaTime);
+
+            OnFixedUpdate();
         }
 
         public void AttachPresenter(Presenter presenter)
@@ -32,6 +40,10 @@ namespace kuRomek.SimpleVG
         }
 
         protected virtual void OnLateUpdate()
+        {
+        }
+
+        protected virtual void OnFixedUpdate()
         {
         }
     }
